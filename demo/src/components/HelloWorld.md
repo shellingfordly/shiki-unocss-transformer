@@ -6,7 +6,7 @@ Inspired by a vscode-plugin [To Unocss](https://github.com/Simon-He95/tounocss),
 
 So with this `Transformer`, let shikijs support the function of To Unocss. As follows:
 
-```scss unocss
+```css
 .container {
   display: none;
   background: red;
@@ -24,4 +24,21 @@ So with this `Transformer`, let shikijs support the function of To Unocss. As fo
 <template>
   <div style="background: red; color: red; width: 100px"></div>
 </template>
+```
+
+```ts twoslash
+// @errors: 2540
+interface Todo {
+  title: string;
+}
+
+const todo: Readonly<Todo> = {
+  title: "Delete inactive users".toUpperCase(),
+};
+
+todo.title = "Hello";
+Number.parseInt("123", 10);
+
+//
+//
 ```

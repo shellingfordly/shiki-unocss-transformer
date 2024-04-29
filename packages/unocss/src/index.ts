@@ -2,9 +2,15 @@ import type {
   ShikiTransformer,
   ShikiTransformerContextMeta,
   ThemedToken,
+  CodeToHastOptions,
 } from "@shikijs/core";
 import type { ElementContent } from "hast";
 import { toUnocss } from "transform-to-unocss-core";
+
+export interface TransformerToUnocssOptions {
+  langs?: string[];
+  explicitTrigger?: boolean | RegExp;
+}
 
 export interface NodeItem {
   line: number;
@@ -14,14 +20,29 @@ export interface NodeItem {
   nativeValue: string;
 }
 
-const cssLangs = ["less", "scss", "css"];
-const htmlLangs = ["html", "vue"];
+const cssLangs = ["css", "less", "scss", "sass", "stylus"];
+const htmlLangs = ["html", "vue", "react", "solid", "svelte", "tsx", "jsx"];
 
-export function transformerToUnocss(): ShikiTransformer {
+export function transformerToUnocss(
+  options: TransformerToUnocssOptions
+): ShikiTransformer {
   const map = new WeakMap<ShikiTransformerContextMeta, { nodes: NodeItem[] }>();
+
+  const { explicitTrigger = false, langs = [...cssLangs, ...htmlLangs] } =
+    options;
+
+  const trigger =
+    explicitTrigger instanceof RegExp ? explicitTrigger : /\bunocss\b/;
+
+  const filter = (lang: string, options: CodeToHastOptions) =>
+    langs.includes(lang) &&
+    (!explicitTrigger || trigger.test(options.meta?.__raw || ""));
 
   return {
     preprocess(code) {
+      const lang = this.options.lang;
+      if (!filter(lang, this.options)) return;
+
       const unocss: { nodes: NodeItem[] } = { nodes: [] };
 
       unocss.nodes = code
@@ -52,10 +73,11 @@ export function transformerToUnocss(): ShikiTransformer {
     pre(pre) {
       const uno = map.get(this.meta);
       if (!uno) return;
-      this.addClassToHast(pre, "twoslash lsp");
+      this.addClassToHast(pre, "shikiuno lsp");
     },
     tokens(tokens) {
       const lang = this.options.lang;
+      if (!filter(lang, this.options)) return;
 
       const extractPreSpace = (token: ThemedToken[]) => {
         return token.flatMap((item) => {
@@ -122,7 +144,7 @@ export function transformerToUnocss(): ShikiTransformer {
           const mergeNode: ElementContent = {
             type: "element",
             tagName: "span",
-            properties: { class: "twoslash-hover" },
+            properties: { class: "shikiuno-hover" },
             children: [...mergeSpans],
           };
 
@@ -142,7 +164,7 @@ export function transformerToUnocss(): ShikiTransformer {
             const child = node.children[0];
             if (child.type === "text") {
               if (item.nativeValue === child.value) {
-                node.properties.class = "twoslash-hover";
+                node.properties.class = "shikiuno-hover";
                 node.children.push(...lineStyleToUnocss(item!));
               } else {
                 node.properties.class = `merge_span_${item.start}_${item.end}`;
@@ -161,17 +183,17 @@ export function lineStyleToUnocss(tag: NodeItem): ElementContent[] {
       type: "element",
       tagName: "span",
       properties: {
-        class: "twoslash-popup-container",
+        class: "shikiuno-popup-container",
       },
       children: [
         {
           type: "element",
           tagName: "code",
-          properties: { class: "twoslash-popup-code" },
+          properties: { class: "shikiuno-popup-code" },
           children: [
             {
               type: "element",
-              tagName: "span",
+              tagName: "div",
               properties: { class: "line" },
               children: [
                 {
@@ -182,7 +204,7 @@ export function lineStyleToUnocss(tag: NodeItem): ElementContent[] {
             },
             {
               type: "element",
-              tagName: "span",
+              tagName: "div",
               properties: { class: "line" },
               children: [
                 {

@@ -32,7 +32,9 @@ export default defineConfig({
                 explicitTrigger: true,
                 renderer: rendererRich(),
               }),
-              transformerToUnocss(),
+              transformerToUnocss({
+                explicitTrigger: true,
+              }),
             ],
           })
         );
