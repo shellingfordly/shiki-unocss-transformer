@@ -4,13 +4,20 @@ import Unocss from "unocss/vite";
 import Markdown from "unplugin-vue-markdown/vite";
 import { rendererRich, transformerTwoslash } from "@shikijs/twoslash";
 import MarkdownItShiki from "@shikijs/markdown-it";
+import { presetUno } from "unocss";
+import { transformerToUnocss } from "shiki-unocss-transformer";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
-    Unocss(),
+    vue({
+      include: [/\.vue$/, /\.md$/],
+    }),
+    Unocss({
+      presets: [presetUno()],
+    }),
     Markdown({
+      wrapperClasses: "prose m-auto slide-enter-content",
       async markdownItSetup(md) {
         md.use(
           await MarkdownItShiki({
@@ -25,6 +32,7 @@ export default defineConfig({
                 explicitTrigger: true,
                 renderer: rendererRich(),
               }),
+              transformerToUnocss(),
             ],
           })
         );

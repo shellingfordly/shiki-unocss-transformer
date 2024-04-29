@@ -1,5 +1,8 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { createApp } from "vue";
+import "./styles/index.css";
+import "@shikijs/twoslash/style-rich.css";
+import "uno.css";
 
-createApp(App).mount('#app')
+import App from "./App.vue";
+
+createApp(App).mount("#app");
