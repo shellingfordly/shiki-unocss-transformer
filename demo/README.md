@@ -1,9 +1,57 @@
-# Vue 3 + TypeScript + Vite
+# shiki-unocss-transformer
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+> A [shiki](https://github.com/shikijs/shiki) transformer for css [to-unocss](https://github.com/Simon-He95/unot).
 
-## Recommended Setup
+Inspired by a vscode-plugin [To Unocss](https://github.com/Simon-He95/tounocss), it is now updated to [UoT](https://github.com/Simon-He95/unot), and [@shikijs/twoslash](https://github.com/shikijs/shiki/tree/main/packages/twoslash) that the shiki transformer for TypeScript Twoslash.
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+So with the `shiki-unocss-transformer`, let shikijs support the function of to unocss. As follows:
 
-- Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
+![](./demo/public/preview.png)
+
+## Install
+
+```
+pnpm add -D shiki-unocss-transformer
+```
+
+## Usage
+
+This package is a transformer addon to Shiki.
+
+```ts
+import { codeToHtml } from "shiki";
+import { transformerToUnocss } from "shiki-unocss-transformer";
+
+const html = await codeToHtml(`console.log()`, {
+  lang: "ts",
+  theme: "vitesse-dark",
+  transformers: [
+    transformerToUnocss(), // <-- here
+    // ...
+  ],
+});
+```
+
+## Explicit Trigger
+
+For not let `shiki-unocss-transformer` to run on every code block. you can set explicitTrigger to true to only run on code blocks with `unocss` presented in the codeframe.
+
+```ts
+import { transformerToUnocss } from "shiki-unocss-transformer";
+
+transformerTwoslash({
+  explicitTrigger: true, // <--
+});
+```
+
+````css
+In markdown, you can use the following syntax to trigger unocss:
+
+```css
+// this is a normal code block
+```
+
+```css unocss
+// this will run unocss
+```
+````
