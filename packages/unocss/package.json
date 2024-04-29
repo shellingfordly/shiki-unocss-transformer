@@ -1,0 +1,27 @@
+{
+  "name": "shiki-unocss-transformer",
+  "version": "0.0.1",
+  "description": "A shiki transformer for css to-unocss.",
+  "author": "shellingfordly <shellingfordly@qq.com>",
+  "homepage": "https://github.com/shellingfordly/shiki-unocss-transformer#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shellingfordly/shiki-unocss-transformer.git",
+    "directory": "packages/twoslash"
+  },
+  "license": "MIT",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub"
+  },
+  "keywords": [
+    "shiki",
+    "toUnocss"
+  ]
+}
