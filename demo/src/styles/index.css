@@ -1,3 +1,18 @@
 @import "./markdown.css";
 @import "./prose.css";
 
+
+
+:root {
+  --c-bg: #fff;
+
+}
+
+html.dark {
+  --c-bg: #050505;
+}
+
+
+html {
+  background-color: var(--c-bg);
+}

@@ -4,7 +4,7 @@ import Unocss from "unocss/vite";
 import Markdown from "unplugin-vue-markdown/vite";
 import { rendererRich, transformerTwoslash } from "@shikijs/twoslash";
 import MarkdownItShiki from "@shikijs/markdown-it";
-import { presetUno } from "unocss";
+import { presetUno, presetIcons } from "unocss";
 import { transformerToUnocss } from "shiki-unocss-transformer";
 
 // https://vitejs.dev/config/
@@ -14,7 +14,17 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
     }),
     Unocss({
-      presets: [presetUno()],
+      presets: [
+        presetUno(),
+        presetIcons({
+          extraProperties: {
+            display: "inline-block",
+            height: "1.2em",
+            width: "1.2em",
+            "vertical-align": "text-bottom",
+          },
+        }),
+      ],
     }),
     Markdown({
       wrapperClasses: "prose m-auto slide-enter-content",

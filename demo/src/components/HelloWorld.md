@@ -2,11 +2,11 @@
 
 > A [shiki](https://github.com/shikijs/shiki) transformer for css [to-unocss](https://github.com/Simon-He95/unot).
 
-Inspired by a vscode-plugin [To Unocss](https://github.com/Simon-He95/tounocss), it is now updated to [UNT](https://github.com/Simon-He95/unot), and [@shikijs/twoslash](https://github.com/shikijs/shiki/tree/main/packages/twoslash) that the shiki transformer for TypeScript Twoslash.
+Inspired by a vscode-plugin [To Unocss](https://github.com/Simon-He95/tounocss), it is now updated to [UoT](https://github.com/Simon-He95/unot), and [@shikijs/twoslash](https://github.com/shikijs/shiki/tree/main/packages/twoslash) that the shiki transformer for TypeScript Twoslash.
 
-So with this `Transformer`, let shikijs support the function of To Unocss. As follows:
+So with the `shiki-unocss-transformer`, let shikijs support the function of to unocss. As follows:
 
-```css
+```css unocss
 .container {
   display: none;
   background: red;
@@ -26,19 +26,24 @@ So with this `Transformer`, let shikijs support the function of To Unocss. As fo
 </template>
 ```
 
-```ts twoslash
-// @errors: 2540
-interface Todo {
-  title: string;
-}
+## Install
 
-const todo: Readonly<Todo> = {
-  title: "Delete inactive users".toUpperCase(),
-};
+```
+pnpm add -D shiki-unocss-transformer
+```
 
-todo.title = "Hello";
-Number.parseInt("123", 10);
+This package is a transformer addon to Shiki.
 
-//
-//
+```ts
+import { codeToHtml } from "shiki";
+import { transformerToUnocss } from "shiki-unocss-transformer";
+
+const html = await codeToHtml(`console.log()`, {
+  lang: "ts",
+  theme: "vitesse-dark",
+  transformers: [
+    transformerToUnocss(), // <-- here
+    // ...
+  ],
+});
 ```
