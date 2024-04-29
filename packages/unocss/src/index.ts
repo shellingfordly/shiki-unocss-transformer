@@ -194,7 +194,7 @@ export function lineStyleToUnocss(tag: NodeItem): ElementContent[] {
             {
               type: "element",
               tagName: "div",
-              properties: { class: "line" },
+              properties: {},
               children: [
                 {
                   type: "text",
@@ -205,7 +205,7 @@ export function lineStyleToUnocss(tag: NodeItem): ElementContent[] {
             {
               type: "element",
               tagName: "div",
-              properties: { class: "line" },
+              properties: {},
               children: [
                 {
                   type: "text",

@@ -1,29 +1,22 @@
+/*
+* the css style form https://github.com/shikijs/shiki/blob/main/packages/twoslash/style-rich.css
+*/
+
 /* ===== Basic ===== */
 :root {
   --shikiuno-border-color: #8888;
   --shikiuno-underline-color: currentColor;
-  --shikiuno-highlighted-border: #c37d0d50;
-  --shikiuno-highlighted-bg: #c37d0d20;
   --shikiuno-popup-bg: #f8f8f8;
   --shikiuno-popup-color: inherit;
   --shikiuno-popup-shadow: rgba(0, 0, 0, 0.08) 0px 1px 4px;
-  --shikiuno-docs-color: #888;
-  --shikiuno-docs-font: sans-serif;
   --shikiuno-code-font: inherit;
   --shikiuno-code-font-size: 1em;
-  --shikiuno-matched-color: inherit;
-  --shikiuno-unmatched-color: #888;
-  --shikiuno-cursor-color: #8888;
-  --shikiuno-error-color: #d45656;
-  --shikiuno-error-bg: #d4565620;
-  --shikiuno-warn-color: #c37d0d;
-  --shikiuno-warn-bg: #c37d0d20;
-  --shikiuno-tag-color: #3772cf;
-  --shikiuno-tag-bg: #3772cf20;
-  --shikiuno-tag-warn-color: var(--shikiuno-warn-color);
-  --shikiuno-tag-warn-bg: var(--shikiuno-warn-bg);
-  --shikiuno-tag-annotate-color: #1ba673;
-  --shikiuno-tag-annotate-bg: #1ba67320;
+}
+
+.dark {
+  color: var(--s-dark, inherit);
+  --shikiuno-popup-bg: #191919;
+  --shikiuno-border-color: #8884;
 }
 
 
