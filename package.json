@@ -5,6 +5,9 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "scripts": {
+    "build:app": "pnpm -r --filter=./apps/* run build"
+  },
   "devDependencies": {
     "typescript": "^5.4.5",
     "unbuild": "^2.0.0"
