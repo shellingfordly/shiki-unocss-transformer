@@ -6,7 +6,7 @@ Inspired by a vscode-plugin [To Unocss](https://github.com/Simon-He95/tounocss),
 
 So with the `shiki-unocss-transformer`, let shikijs support the function of to unocss. As follows:
 
-![](https://github.com/shellingfordly/shiki-unocss-transformer/blob/main/demo/public/preview.png)
+![](https://github.com/shellingfordly/shiki-unocss-transformer/blob/main/apps/demo/public/preview.png)
 
 ## Install
 
