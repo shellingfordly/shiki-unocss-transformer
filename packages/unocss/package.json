@@ -1,6 +1,6 @@
 {
   "name": "shiki-unocss-transformer",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A shiki transformer for css to-unocss.",
   "author": "shellingfordly <shellingfordly@qq.com>",
   "homepage": "https://github.com/shellingfordly/shiki-unocss-transformer#readme",
@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "dev": "unbuild --stub"
+    "dev": "unbuild"
   },
   "keywords": [
     "shiki",
